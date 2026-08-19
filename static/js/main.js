@@ -293,3 +293,107 @@ if (contactForm) {
     }
   });
 }
+
+// ---- Custom mouse cursor ----
+if (window.matchMedia('(pointer: fine)').matches) {
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  cursor.setAttribute('aria-hidden', 'true');
+  cursor.innerHTML = '<span class="custom-cursor__ring"></span><span class="custom-cursor__dot"></span>';
+  document.body.appendChild(cursor);
+  document.body.style.cursor = 'none';
+
+  const ring = cursor.querySelector('.custom-cursor__ring');
+  const dot = cursor.querySelector('.custom-cursor__dot');
+  cursor.style.position = 'fixed';
+  cursor.style.inset = '0';
+  cursor.style.zIndex = '9999';
+  cursor.style.pointerEvents = 'none';
+  cursor.style.opacity = '0';
+  cursor.style.transition = 'opacity .18s ease';
+  ring.style.position = 'absolute';
+  ring.style.top = '0';
+  ring.style.left = '0';
+  ring.style.borderRadius = '9999px';
+  ring.style.willChange = 'transform';
+  ring.style.width = '36px';
+  ring.style.height = '36px';
+  ring.style.margin = '-18px 0 0 -18px';
+  ring.style.border = '1px solid rgba(99,102,241,.55)';
+  ring.style.background = 'rgba(99,102,241,.08)';
+  ring.style.boxShadow = '0 0 24px rgba(99,102,241,.2)';
+  ring.style.transition = 'width .18s ease,height .18s ease,border-color .18s ease,background-color .18s ease';
+  dot.style.position = 'absolute';
+  dot.style.top = '0';
+  dot.style.left = '0';
+  dot.style.borderRadius = '9999px';
+  dot.style.willChange = 'transform';
+  dot.style.width = '8px';
+  dot.style.height = '8px';
+  dot.style.margin = '-4px 0 0 -4px';
+  dot.style.background = '#38bdf8';
+  dot.style.boxShadow = '0 0 16px rgba(56,189,248,.55)';
+  let x = window.innerWidth / 2;
+  let y = window.innerHeight / 2;
+  let rx = x;
+  let ry = y;
+  let rafId = 0;
+
+  const animate = () => {
+    rx += (x - rx) * 0.18;
+    ry += (y - ry) * 0.18;
+    ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+    dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+    if (Math.abs(x - rx) > 0.1 || Math.abs(y - ry) > 0.1) {
+      rafId = window.requestAnimationFrame(animate);
+    } else {
+      rafId = 0;
+    }
+  };
+
+  const start = () => {
+    cursor.classList.add('is-visible');
+    cursor.style.opacity = '1';
+    if (!rafId) {
+      rafId = window.requestAnimationFrame(animate);
+    }
+  };
+
+  window.addEventListener('pointermove', (event) => {
+    x = event.clientX;
+    y = event.clientY;
+    start();
+  });
+
+  window.addEventListener('pointerleave', () => {
+    cursor.classList.remove('is-visible', 'is-hovering', 'is-pressed');
+    cursor.style.opacity = '0';
+  });
+
+  window.addEventListener('blur', () => {
+    cursor.classList.remove('is-visible', 'is-hovering', 'is-pressed');
+    cursor.style.opacity = '0';
+  });
+
+  document.addEventListener('pointerover', (event) => {
+    if (event.target.closest('a, button, input, textarea, [role="button"]')) {
+      cursor.classList.add('is-hovering');
+    } else {
+      cursor.classList.remove('is-hovering');
+    }
+  });
+
+  document.addEventListener('pointerout', (event) => {
+    if (event.target.closest('a, button, input, textarea, [role="button"]')) {
+      cursor.classList.remove('is-hovering');
+    }
+  });
+
+  document.addEventListener('pointerdown', () => {
+    cursor.classList.add('is-pressed');
+  });
+
+  document.addEventListener('pointerup', () => {
+    cursor.classList.remove('is-pressed');
+  });
+}
