@@ -1,0 +1,128 @@
+/* style.css - shared styles for Bug Bounty Training app */
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #f4f6f8;
+  color: #222;
+}
+
+nav {
+  background: #2c3e50;
+  padding: 14px 24px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover { text-decoration: underline; }
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+h1, h2 { color: #2c3e50; }
+
+label { display: block; margin-top: 14px; font-weight: bold; }
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+button, .btn {
+  margin-top: 18px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  background: #2980b9;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover, .btn:hover { background: #2471a3; }
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+th { background: #ecf0f1; }
+
+footer {
+  text-align: center;
+  padding: 16px;
+  color: #777;
+  font-size: 13px;
+}
+
+/* ================= BUG-21 (LOW) =================
+   The hero banner text and the subtitle are both positioned
+   "absolute" at the exact same coordinates, so they overlap
+   and become unreadable instead of stacking normally.
+   Fix: remove position:absolute (or give them different
+   top/left values) so the text flows normally. */
+.hero {
+  position: relative;
+  padding: 40px 20px;
+  text-align: center;
+}
+.hero h1 {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.hero p.subtitle {
+  position: absolute;
+  top: 20px; /* BUG: same "top" as the h1 above -> text overlaps */
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* ================================================= */
+
+/* ================= BUG-22 (LOW) =================
+   The signup submit button uses float:right but its parent
+   has no clearfix / the button never actually right-aligns
+   correctly relative to the rest of the form - it visibly
+   sits outside/overlapping the form box on smaller screens.
+   Fix: use normal flow (e.g. margin-left:auto in a flex
+   container) instead of float. */
+.misaligned-btn {
+  float: right;
+  margin-right: -40px;
+}
+/* ================================================= */
+
+.error-text { color: #c0392b; font-size: 13px; }
+.small-note { color: #888; font-size: 12px; }

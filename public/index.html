@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopMart - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="report-bug.html">Report a Bug</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="admin.html">Admin</a>
+    <!-- BUG-07 (CRITICAL): "Logout" link is shown even though no one is
+         logged in, and clicking it does not actually clear any session -
+         there IS no session/auth logic anywhere in this app, so the site
+         always behaves as if you're logged in.
+         Fix: implement real login state (e.g. localStorage flag or server
+         session) and only show Logout / clear it properly when clicked. -->
+    <a href="#" id="logoutLink" onclick="return false;">Logout</a>
+  </nav>
+
+  <div class="container">
+
+    <div class="hero">
+      <!-- BUG-21 is in style.css: these two elements overlap -->
+      <h1>Welcome to ShopMart</h1>
+      <p class="subtitle">Your one-stop shop for everything</p>
+    </div>
+
+    <!-- BUG-18 (LOW): image src points to a file that does not exist,
+         so this will show as a broken image icon.
+         Fix: correct the path to an image that actually exists, e.g.
+         "images/banner.png" -->
+    <img src="images/banner-image-that-does-not-exist.jpg" alt="Store banner" style="width:100%; max-height:200px; object-fit:cover; margin-top:20px;">
+
+    <!-- BUG-19 (LOW): obvious spelling mistake ("Wlecome" / "recieve").
+         Fix: correct spelling to "Welcome" and "receive". -->
+    <p style="margin-top:20px;">
+      Wlecome to our store! Sign up today and recieve exclusive deals
+      straight to your inbox.
+    </p>
+
+    <p>
+      Check out our <a href="products.html">product catalog</a>, or learn
+      more about how we started.
+    </p>
+
+    <!-- BUG-20 (LOW): this link points to a page that was never created,
+         so clicking it leads to a 404 Not Found page.
+         Fix: create "about-us.html" or point the link to a real page. -->
+    <a href="about-us.html" class="btn" style="display:inline-block; text-decoration:none;">Learn More About Us</a>
+
+  </div>
+
+  <!-- BUG-23 (LOW): copyright year is hardcoded to an old year instead
+       of showing the current year.
+       Fix: use JavaScript (e.g. new Date().getFullYear()) or update the
+       year manually each year. -->
+  <footer>&copy; 2020 ShopMart Inc. All rights reserved.</footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

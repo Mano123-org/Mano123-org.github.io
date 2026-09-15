@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopMart - Admin Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="report-bug.html">Report a Bug</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="admin.html">Admin</a>
+  </nav>
+
+  <div class="container">
+    <!--
+      BUG-03 (CRITICAL): this entire Admin page loads with zero login
+      or permission checks. Anyone can type "/admin.html" into the
+      browser (or just click "Admin" in the nav bar) and immediately
+      see "confidential" admin data - no username/password required.
+      Fix: check for a valid logged-in admin session on page load
+      (e.g. server-side auth middleware, or at minimum a client-side
+      check that redirects to login.html if not authenticated) before
+      showing any of this content.
+    -->
+    <h1>Admin Dashboard</h1>
+    <p class="error-text">⚠ This page should require admin login, but it doesn't!</p>
+
+    <h2>All Registered Users (example data)</h2>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Alex Johnson</td><td>alex@example.com</td><td>Admin</td></tr>
+        <tr><td>2</td><td>Priya Sharma</td><td>priya@example.com</td><td>Customer</td></tr>
+        <tr><td>3</td><td>Sam Lee</td><td>sam@example.com</td><td>Customer</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top:20px;">Store Settings</h2>
+    <p>Total Orders Today: 42</p>
+    <p>Revenue Today: $1,204.00</p>
+  </div>
+
+  <footer>&copy; 2020 ShopMart Inc. All rights reserved.</footer>
+</body>
+</html>
