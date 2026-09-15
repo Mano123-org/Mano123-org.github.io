@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopMart - Report a Bug</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="report-bug.html">Report a Bug</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="admin.html">Admin</a>
+  </nav>
+
+  <div class="container">
+    <h1>Report a Bug</h1>
+    <p class="small-note">Found one of the 25 bugs? Fill out the form below to submit your report.</p>
+
+    <form id="reportForm" enctype="multipart/form-data">
+      <label for="title">Bug Title</label>
+      <input type="text" id="title" name="title" required placeholder="e.g. Login button does nothing">
+
+      <label for="description">Bug Description / Steps to Reproduce</label>
+      <textarea id="description" name="description" rows="5" required placeholder="1. Go to... 2. Click... 3. Notice that..."></textarea>
+
+      <label for="severity">Severity</label>
+      <!-- BUG-15 (HIGH): this dropdown has no "required" attribute and
+           its first option is a blank value, so a student can submit a
+           bug report without ever selecting a severity level.
+           Fix: add the "required" attribute (or validate in JS) so the
+           form cannot submit while severity is blank. -->
+      <select id="severity" name="severity">
+        <option value="">-- Select severity --</option>
+        <option value="Critical">Critical</option>
+        <option value="High">High</option>
+        <option value="Low">Low</option>
+      </select>
+
+      <label for="screenshot">Screenshot Evidence</label>
+      <input type="file" id="screenshot" name="screenshot" accept="image/*">
+
+      <!-- BUG-24 (LOW): the Submit button is styled bright red like a
+           "Delete" or "Cancel" action, which sends the wrong visual
+           signal for a positive action like submitting a report.
+           Fix: remove the inline red style so it uses the normal blue
+           button style from style.css. -->
+      <button type="submit" id="submitReportBtn" style="background:#e74c3c;">Submit Report</button>
+    </form>
+
+    <p id="reportMsg" class="small-note"></p>
+  </div>
+
+  <footer>&copy; 2020 ShopMart Inc. All rights reserved.</footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/report.js"></script>
+</body>
+</html>

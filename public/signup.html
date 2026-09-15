@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopMart - Sign Up</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="report-bug.html">Report a Bug</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="admin.html">Admin</a>
+  </nav>
+
+  <div class="container">
+    <h1>Create an Account</h1>
+
+    <form id="signupForm">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" name="fullName" required>
+
+      <label for="signupEmail">Email</label>
+      <!-- BUG-09 (HIGH): the "required" attribute is missing, so this
+           form can be submitted with a completely blank email field.
+           Fix: add the "required" attribute back. -->
+      <input type="text" id="signupEmail" name="signupEmail" placeholder="you@example.com">
+
+      <!-- BUG-13 (HIGH): field is type="text" instead of type="email" and
+           has no pattern/validation, so typing something like "banana"
+           (not a real email) is accepted as valid.
+           Fix: change to type="email" and/or add a validation pattern. -->
+
+      <label for="age">Age</label>
+      <!-- BUG-08 (HIGH): no min="0" attribute (and no JS validation),
+           so a user can type a negative number like -5 and the form
+           still accepts it as a valid age.
+           Fix: add min="0" and validate on submit. -->
+      <input type="number" id="age" name="age" placeholder="Enter your age">
+
+      <label for="signupPassword">Password</label>
+      <input type="password" id="signupPassword" name="signupPassword">
+
+      <label for="confirmPassword">Confirm Password</label>
+      <!-- BUG-14 (HIGH): there is no check anywhere that this field
+           actually matches the Password field above - the form will
+           submit "successfully" even if they don't match.
+           Fix: compare signupPassword and confirmPassword before
+           allowing submission. -->
+      <input type="password" id="confirmPassword" name="confirmPassword">
+
+      <!-- BUG-04 (CRITICAL): the Create Account button has no click
+           handler and the form has no submit handler at all, so
+           clicking this button does nothing whatsoever.
+           Fix: add a submit/click handler that validates and creates
+           the account (or at least shows a confirmation). -->
+      <button type="button" class="misaligned-btn" id="signupBtn">Create Account</button>
+    </form>
+
+    <p class="small-note">Already have an account? <a href="login.html">Login here</a>.</p>
+  </div>
+
+  <footer>&copy; 2020 ShopMart Inc. All rights reserved.</footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

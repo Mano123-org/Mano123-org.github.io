@@ -1,0 +1,14 @@
+{
+  "name": "bug-bounty-training",
+  "version": "1.0.0",
+  "description": "A beginner-friendly web app with 25 deliberate, simple bugs for students to practice bug hunting and bug reporting.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.1.7"
+  }
+}

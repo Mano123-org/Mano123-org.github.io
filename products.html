@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopMart - Products</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="report-bug.html">Report a Bug</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="admin.html">Admin</a>
+  </nav>
+
+  <div class="container">
+    <h1>Our Products</h1>
+
+    <!-- BUG-17 (HIGH): this search box has no JavaScript attached to it
+         at all - typing a product name and pressing Enter/clicking
+         Search does not filter the list below in any way.
+         Fix: add a keyup/submit handler that filters .product-card
+         elements based on the input value. -->
+    <input type="text" id="searchBox" placeholder="Search products...">
+    <button type="button" id="searchBtn">Search</button>
+
+    <div id="productList" style="margin-top:20px;">
+
+      <div class="product-card" data-price="20" data-name="Wireless Mouse">
+        <div>
+          <strong>Wireless Mouse</strong> - $20
+          <!-- BUG-25 (LOW): leftover placeholder text that was never
+               replaced with a real product description before launch.
+               Fix: replace with an actual product description. -->
+          <p class="small-note">Lorem ipsum dolor sit amet, TODO: write real product description here.</p>
+        </div>
+        <button type="button" class="btn addToCartBtn" data-name="Wireless Mouse" data-price="20">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-price="45" data-name="Mechanical Keyboard">
+        <div>
+          <strong>Mechanical Keyboard</strong> - $45
+          <p class="small-note">A responsive mechanical keyboard great for typing and gaming.</p>
+        </div>
+        <button type="button" class="btn addToCartBtn" data-name="Mechanical Keyboard" data-price="45">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-price="15" data-name="USB-C Cable">
+        <div>
+          <strong>USB-C Cable</strong> - $15
+          <p class="small-note">Durable braided cable, 2 meters long.</p>
+        </div>
+        <!-- BUG-05 (CRITICAL): this button calls a function name that
+             doesn't match the real addToCart() function in main.js
+             (notice the typo "addTocart"), so clicking "Add to Cart"
+             for this one product does nothing at all.
+             Fix: correct the onclick to call addToCart(...) exactly,
+             or better, use the same data-attribute + event listener
+             pattern as the other two buttons. -->
+        <button type="button" class="btn" onclick="addTocart('USB-C Cable', 15)">Add to Cart</button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>&copy; 2020 ShopMart Inc. All rights reserved.</footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

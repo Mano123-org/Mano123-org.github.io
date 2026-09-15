@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopMart - Cart</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="report-bug.html">Report a Bug</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="admin.html">Admin</a>
+  </nav>
+
+  <div class="container">
+    <h1>Your Cart</h1>
+    <p class="small-note">(This demo cart starts with two sample items already added.)</p>
+
+    <table id="cartTable">
+      <thead>
+        <tr><th>Item</th><th>Price</th><th>Quantity</th><th>Subtotal</th></tr>
+      </thead>
+      <tbody id="cartBody">
+        <!-- rows are rendered by cart.js -->
+      </tbody>
+    </table>
+
+    <div style="margin-top:20px;">
+      <label for="qtyInput1">Quantity for Wireless Mouse</label>
+      <!-- BUG-11 (HIGH): no min="1" attribute, so a user can type a
+           negative quantity like -3 and the cart will "accept" it.
+           Fix: add min="1" and validate before updating the cart. -->
+      <input type="number" id="qtyInput1" value="1">
+
+      <!-- BUG-16 (HIGH): the "+" button is wired to decreaseQty()
+           instead of increaseQty() (functions are intentionally
+           swapped in cart.js), so clicking "+" actually lowers the
+           quantity instead of raising it.
+           Fix: swap the onclick handlers so "+" increases and "-"
+           decreases. -->
+      <button type="button" onclick="decreaseQty()">+</button>
+      <button type="button" onclick="increaseQty()">-</button>
+    </div>
+
+    <div style="margin-top:20px;">
+      <label for="discountCode">Discount Code</label>
+      <input type="text" id="discountCode" placeholder="Enter code e.g. SAVE10">
+      <!-- BUG-12 (HIGH): clicking Apply shows a "success" message but
+           never actually subtracts anything from the displayed total -
+           the total amount does not change at all.
+           Fix: recalculate and update the displayed total after a
+           valid discount code is applied. -->
+      <button type="button" id="applyDiscountBtn">Apply Discount</button>
+      <p id="discountMsg" class="small-note"></p>
+    </div>
+
+    <h2 style="margin-top:30px;">Total: $<span id="cartTotal">0</span></h2>
+
+    <!-- BUG-06 (CRITICAL): the Checkout button has no click handler
+         attached anywhere in the JS, so clicking it does absolutely
+         nothing - no confirmation, no redirect, no order placed.
+         Fix: add a real handler, e.g. a checkout() function that
+         confirms the order. -->
+    <button type="button" id="checkoutBtn" class="btn">Checkout</button>
+  </div>
+
+  <footer>&copy; 2020 ShopMart Inc. All rights reserved.</footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
